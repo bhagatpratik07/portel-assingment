@@ -1,0 +1,19 @@
+.editor-container {
+  height: 300px; /* Set the desired height */
+  width: 400px; /* Set the desired width */
+  border: 1px solid black; /* Add a black border */
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
