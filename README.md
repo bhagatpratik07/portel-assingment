@@ -1,5 +1,7 @@
 # React Sorcerer Take Home Test - Draft.js Editor
 
+Live: [here](https://portel-assingment.vercel.app/)
+
 Features
 
 1. Draft.js Editor
