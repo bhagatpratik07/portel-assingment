@@ -6,7 +6,6 @@ import {
   RichUtils,
   convertFromRaw,
   convertToRaw,
-  getDefaultKeyBinding,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import "../styles/Editor.css";
@@ -43,17 +42,6 @@ const CustomEditor = () => {
     }
 
     return "not-handled";
-  };
-
-  const mapKeyToEditorCommand = (e) => {
-    if (e.keyCode === 9 /* TAB */) {
-      const newEditorState = RichUtils.onTab(e, editorState, 4 /* maxDepth */);
-      if (newEditorState !== editorState) {
-        setEditorState(newEditorState);
-      }
-      return null;
-    }
-    return getDefaultKeyBinding(e);
   };
 
   const handleChange = (newEditorState) => {
@@ -166,7 +154,17 @@ const CustomEditor = () => {
   return (
     <div onClick={focusEditor} className="container">
       <div className="header">
-        <h2 className="heading">Demo editor by Pratik Bhagat</h2>
+        <h2 className="heading">
+          Demo editor by{" "}
+          <a
+            href="https://www.linkedin.com/in/pratik-bhagat07/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {" "}
+            Pratik Bhagat
+          </a>
+        </h2>
         <button className="save-button" onClick={handleSave}>
           Save
         </button>
@@ -177,7 +175,6 @@ const CustomEditor = () => {
           editorState={editorState}
           onChange={handleChange}
           handleKeyCommand={handleKeyCommand}
-          keyBindingFn={mapKeyToEditorCommand}
           ref={editorRef}
           placeholder="Type here..."
           customStyleMap={styleMap}
@@ -188,3 +185,47 @@ const CustomEditor = () => {
 };
 
 export default CustomEditor;
+
+// REMOVE THE SYMBOLS
+
+/* 
+ // Check if the change is due to a space
+    if (
+      startOffset > 0 &&
+      blockText[startOffset - 1] === " " &&
+      selection.isCollapsed()
+    ) {
+      const spaceIndex = blockText.lastIndexOf(" ", startOffset - 2) + 1;
+      const appliedStyle = currentBlock.getInlineStyleAt(spaceIndex);
+      const newSelection = selection.merge({
+        anchorOffset: spaceIndex,
+        focusOffset: startOffset,
+      });
+
+      // Apply the style to the block/line
+      let updatedEditorState = EditorState.setInlineStyleOverride(
+        newEditorState,
+        appliedStyle,
+        newSelection
+      );
+
+      // Remove the space character
+      const contentState = updatedEditorState.getCurrentContent();
+      const newContentState = Modifier.replaceText(
+        contentState,
+        newSelection,
+        "",
+        null,
+        appliedStyle
+      );
+
+      updatedEditorState = EditorState.push(
+        updatedEditorState,
+        newContentState,
+        "apply-entity"
+      );
+
+      setEditorState(updatedEditorState);
+      return;
+    }
+*/
